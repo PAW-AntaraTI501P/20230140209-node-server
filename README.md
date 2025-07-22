@@ -6,4 +6,4 @@
 
 | <img src="https://avatars.githubusercontent.com/u/161204020?v=4" width="150px"> |
 |:--:|
-| [Lu'lu' Luthfiah](https://github.com/lulultfh)` |
+| [Lu'lu' Luthfiah](https://github.com/lulultfh) |

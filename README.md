@@ -1,4 +1,4 @@
-# Praktikum 1 Node JS
+# Praktikum 1 Node-Server
 
 > this project was created for TI501P Pengembangan Aplikasi Web
 

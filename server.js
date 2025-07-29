@@ -14,6 +14,10 @@ app.get("/contact", (req, res) => {
     res.render("contact"); //render ke file contact.ejs
 })
 
+app.use((req, res) => {
+    res.status(404).send("404 - Page not found");
+});
+
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 })

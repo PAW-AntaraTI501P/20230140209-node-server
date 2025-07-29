@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 5000;
+
 app.use(express.json());
 
 app.set("view engine", "ejs"); //utk ke halaman ejs
@@ -9,8 +10,8 @@ app.get('/', (req, res) => {
     res.render("index"); //render file ke index.ejs
 })
 
-app.get("contact", (req, res) => {
-    req.render("contact"); //render ke file contact.ejs
+app.get("/contact", (req, res) => {
+    res.render("contact"); //render ke file contact.ejs
 })
 
 app.listen(port, () => {

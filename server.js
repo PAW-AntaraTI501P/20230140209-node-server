@@ -1,9 +1,16 @@
 const express = require('express');
 const app = express();
 const port = 5000;
+app.use(express.json());
+
+app.set("view engine", "ejs"); //utk ke halaman ejs
 
 app.get('/', (req, res) => {
-    res.json({ message: 'Hello from Node.js Server!' });
+    res.render("index"); //render file ke index.ejs
+})
+
+app.get("contact", (req, res) => {
+    req.render("contact"); //render ke file contact.ejs
 })
 
 app.listen(port, () => {

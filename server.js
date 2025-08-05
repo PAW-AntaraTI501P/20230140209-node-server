@@ -2,7 +2,11 @@ const express = require('express');
 const app = express();
 const port = 5000;
 
+const todoRoutes = require("./routes/todo");
+const { todos } = require("./routes/todo");
+
 app.use(express.json());
+app.use("/todos", todoRoutes);
 
 app.set("view engine", "ejs"); //utk ke halaman ejs
 

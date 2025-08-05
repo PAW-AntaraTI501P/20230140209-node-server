@@ -40,3 +40,5 @@ router.delete("/:id", (req, res) => {
   todos.splice(todoIndex, 1);
   res.status(204).send();
 });
+
+module.exports = router;

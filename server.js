@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 5000;
+const port = 3001;
 
 const todoRoutes = require("./routes/todo");
 const { todos } = require("./routes/todo");

@@ -25,6 +25,20 @@ app.get("/todos-data", (req,res) =>{
 app.get("/todos-list", (req,res) =>{
     res.render("todos-page", {todos: todos});
 })
+app.post("todos-list/add", (res,req) => {
+    const newTaskText = req.body.task;
+
+    if (newTaskText && newTaskText.trim() !==""){
+        todos.length > 0 ? Math.max(...todos.map((t)=> t.id))+1:1;
+
+        const newTodo = {
+            id: newId,
+            task: newTaskText,
+        };
+        todos.push(newTodo);
+    }
+    res.redirect("/todos-list;");
+})
 
 app.use((req, res) => {
     res.status(404).send("404 - Page not found");

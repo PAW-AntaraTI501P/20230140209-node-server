@@ -1,10 +1,10 @@
+require("dovnet").config();
 const express = require('express');
 const app = express();
-const cors = require("cors");
-const port = 3001;
 
 const todoRoutes = require("./routes/todo.js");
 const { todos } = require("./routes/todo.js");
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use("/todos", todoRoutes);

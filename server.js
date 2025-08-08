@@ -19,6 +19,13 @@ app.get("/contact", (req, res) => {
     res.render("contact"); //render ke file contact.ejs
 })
 
+app.get("/todos-data", (req,res) =>{
+    res.json(todos);
+})
+app.get("/todos-list", (req,res) =>{
+    res.render("todos-page", {todos: todos});
+})
+
 app.use((req, res) => {
     res.status(404).send("404 - Page not found");
 });

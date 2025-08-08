@@ -51,6 +51,16 @@ app.put("/todos-list/edit/:id", (req, res) => {
   res.redirect("/todos-list");
 });
 
+app.delete("/todos-list/delete/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = todos.findIndex((t) => t.id === id);
+
+  if (index !== -1) {
+    todos.splice(index, 1);
+  }
+  res.redirect("/todos-list");
+});
+
 app.use((req, res) => {
   res.status(404).send("404 - Page not found");
 });

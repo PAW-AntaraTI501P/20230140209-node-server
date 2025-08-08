@@ -5,8 +5,11 @@ const app = express();
 const todoRoutes = require("./routes/todo.js");
 const { todos } = require("./routes/todo.js");
 const port = process.env.PORT;
+const methodOverride = require('method-override');
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.use("/todos", todoRoutes);
 
 app.set("view engine", "ejs"); //utk ke halaman ejs
@@ -25,39 +28,46 @@ app.get("/todos-data", (req, res) => {
 app.get("/todos-list", (req, res) => {
   res.render("todos-page", { todos: todos });
 });
-app.post("todos-list/add", (res, req) => {
-  const newTaskText = req.body.task;
-
-  if (newTaskText && newTaskText.trim() !== "") {
-    todos.length > 0 ? Math.max(...todos.map((t) => t.id)) + 1 : 1;
-
-    const newTodo = {
-      id: newId,
-      task: newTaskText,
-    };
-    todos.push(newTodo);
+app.post("/todos-list/add", (req, res) => {
+  const { task } = req.body;
+  if (!task || task.trim() === "") {
+    return res.status(400).send("Task tidak boleh kosong");
   }
-  res.redirect("/todos-list;");
+
+  const newTodo = {
+    id: todos.length > 0 ? todos[todos.length - 1].id + 1 : 1,
+    task: task.trim()
+  };
+  todos.push(newTodo);
+
+  res.redirect("/todos-list");
 });
 
 app.put("/todos-list/edit/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const updatedTaskText = req.body.task;
+  const { task } = req.body;
+  const todo = todos.find(t => t.id === id);
 
-  const todoIndex = todos.findIndex((t) => t.id === id);
-  if (todoIndex !== -1 && updatedTaskText && updatedTaskText.trim() !== "") {
-    todos[todoIndex].task = updatedTaskText.trim();
+  if (!todo) {
+    return res.status(404).send("Tugas tidak ditemukan");
   }
+  if (!task || task.trim() === "") {
+    return res.status(400).send("Task tidak boleh kosong");
+  }
+
+  todo.task = task.trim();
   res.redirect("/todos-list");
 });
 
 app.delete("/todos-list/delete/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const index = todos.findIndex((t) => t.id === id);
+  const index = todos.findIndex(t => t.id === id);
 
-  if (index !== -1) {
-    todos.splice(index, 1);
+  if (index === -1) {
+    return res.status(404).send("Tugas tidak ditemukan");
   }
+
+  todos.splice(index, 1);
   res.redirect("/todos-list");
 });
 

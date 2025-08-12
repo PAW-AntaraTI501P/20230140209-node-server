@@ -1,8 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const db = require("./database/db.js")
 
-const todoRoutes = require("./routes/todo.js");
+const todoRoutes = require("./routes/tododb.js");
 const { todos } = require("./routes/todo.js");
 const port = process.env.PORT;
 const methodOverride = require('method-override');
@@ -69,6 +70,15 @@ app.delete("/todos-list/delete/:id", (req, res) => {
 
   todos.splice(index, 1);
   res.redirect("/todos-list");
+});
+
+app.get("/todo-view", (req,res) =>{
+  db.query("SELECT * from todos", (err, todos) =>{
+    if(err) return res.status(500).send("Internal Server Error")
+      res.render("todo", {
+        todos: todos,
+      });
+  });
 });
 
 app.use((req, res) => {

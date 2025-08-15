@@ -10,7 +10,8 @@
 | **Contact Page** |<img width="1919" height="963" alt="image" src="https://github.com/user-attachments/assets/1cfbbeb5-f45e-45e0-8710-a6b43f512903" />|
 
 ## Contributor
-| <img src="https://avatars.githubusercontent.com/u/161204020?v=4" width="150px"> |
+| align="center" <img src="https://avatars.githubusercontent.com/u/161204020?v=4" width="150px"> |
 |:--:|
 | [Lu'lu' Luthfiah](https://github.com/lulultfh) |
 | 20230140209 |
+

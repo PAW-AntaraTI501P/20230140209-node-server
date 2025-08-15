@@ -1,33 +1,40 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const db = require("./database/db.js")
+const db = require("./database/db.js");
 
 const todoRoutes = require("./routes/tododb.js");
 const { todos } = require("./routes/todo.js");
 const port = process.env.PORT;
-const methodOverride = require('method-override');
+const methodOverride = require("method-override");
+
+const expressLayout = require("express-ejs-layouts");
+app.use(expressLayout);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 app.use("/todos", todoRoutes);
 
 app.set("view engine", "ejs"); //utk ke halaman ejs
 
 app.get("/", (req, res) => {
-  res.render("index"); //render file ke index.ejs
+  res.render("index", {
+    layout: "layouts/main-layout",
+  }); //render file ke index.ejs
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact"); //render ke file contact.ejs
+  res.render("contact", {
+    layout: "layouts/main-layout",
+  }); //render ke file contact.ejs
 });
 
 app.get("/todos-data", (req, res) => {
   res.json(todos);
 });
 app.get("/todos-list", (req, res) => {
-  res.render("todos-page", { todos: todos });
+  res.render("todos-page", { todos: todos, layout: "layouts/main-layout" });
 });
 app.post("/todos-list/add", (req, res) => {
   const { task } = req.body;
@@ -37,7 +44,7 @@ app.post("/todos-list/add", (req, res) => {
 
   const newTodo = {
     id: todos.length > 0 ? todos[todos.length - 1].id + 1 : 1,
-    task: task.trim()
+    task: task.trim(),
   };
   todos.push(newTodo);
 
@@ -47,7 +54,7 @@ app.post("/todos-list/add", (req, res) => {
 app.put("/todos-list/edit/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const { task } = req.body;
-  const todo = todos.find(t => t.id === id);
+  const todo = todos.find((t) => t.id === id);
 
   if (!todo) {
     return res.status(404).send("Tugas tidak ditemukan");
@@ -62,7 +69,7 @@ app.put("/todos-list/edit/:id", (req, res) => {
 
 app.delete("/todos-list/delete/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const index = todos.findIndex(t => t.id === id);
+  const index = todos.findIndex((t) => t.id === id);
 
   if (index === -1) {
     return res.status(404).send("Tugas tidak ditemukan");
@@ -72,12 +79,13 @@ app.delete("/todos-list/delete/:id", (req, res) => {
   res.redirect("/todos-list");
 });
 
-app.get("/todo-view", (req,res) =>{
-  db.query("SELECT * from todos", (err, todos) =>{
-    if(err) return res.status(500).send("Internal Server Error")
-      res.render("todo", {
-        todos: todos,
-      });
+app.get("/todo-view", (req, res) => {
+  db.query("SELECT * from todos", (err, todos) => {
+    if (err) return res.status(500).send("Internal Server Error");
+    res.render("todo", {
+      todos: todos,
+      layout: "layouts/main-layout",
+    });
   });
 });
 

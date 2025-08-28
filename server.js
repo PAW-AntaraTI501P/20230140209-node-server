@@ -154,6 +154,31 @@ app.put("/api/todos/:id", (req, res) => {
     });
 });
 
+// PUT: Memperbarui task
+app.put("/api/todos/update-task/:id", (req, res) => {
+  const { id } = req.params;
+  const { task } = req.body;
+  console.log(`Menerima permintaan PUT untuk ID: ${id} dengan task baru: ${task}`);
+
+  if (!task) {
+      return res.status(400).json({ error: "Task tidak boleh kosong" });
+  }
+
+  const query = 'UPDATE todos SET task = ? WHERE id = ?';
+
+  db.query(query, [task, id], (err, result) => {
+      if (err) {
+          console.error("Database update error:", err);
+          return res.status(500).json({ error: "Internal Server Error" });
+      }
+      if (result.affectedRows === 0) {
+          return res.status(404).json({ error: 'Todo not found' });
+      }
+      console.log(`Todo dengan ID ${id} berhasil diperbarui.`);
+      res.json({ message: 'Todo task updated successfully', task: task });
+  });
+});
+
 // DELETE: Menghapus todo berdasarkan ID
 app.delete("/api/todos/:id", (req, res) => {
     const { id } = req.params;

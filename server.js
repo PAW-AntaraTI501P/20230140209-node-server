@@ -2,8 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const db = require("./database/db.js");
-const todoRoutes = require("./routes/tododb.js");
-const { todos } = require("./routes/todo.js");
+const {router: todoRoutes, todos} = require("./routes/todo.js");
+const cors = require("cors");
 const port = process.env.PORT;
 const methodOverride = require("method-override");
 const expressLayout = require("express-ejs-layouts");
@@ -15,6 +15,7 @@ app.use(methodOverride("_method"));
 app.use("/todos", todoRoutes);
 app.use(express.static('public'));
 
+app.use(cors());
 app.set("view engine", "ejs"); //utk ke halaman ejs
 
 app.get("/", (req, res) => {
@@ -90,8 +91,20 @@ app.get("/todo-view", (req, res) => {
 
 // GET: Mengambil semua todos
 app.get("/api/todos", (req, res) => {
-  console.log("Menerima permintaan GET untuk todos.");
-  db.query("SELECT * FROM todos", (err, todos) => {
+  const { search } = req.query;
+  console.log(
+    `Menerima permintaan GET untuk todos. Kriteria pencarian: '${search || "Tidak ada"}'`
+  );
+
+  let query = "SELECT * FROM todos";
+  const params = [];
+
+  if (search) {
+    query += " WHERE task LIKE ?";
+    params.push(`%${search}%`);
+  }
+
+  db.query(query, params, (err, todos) => {
     if (err) {
       console.error("Database query error:", err);
       return res.status(500).json({ error: "Internal Server Error" });
@@ -197,6 +210,30 @@ app.delete("/api/todos/:id", (req, res) => {
         res.json({ message: 'Todo deleted successfully' });
     });
 });
+
+// app.get("/api/todos", (req, res) => {
+//   const { search } = req.query;
+//   console.log(
+//     `Menerima permintaan GET untuk todos. Kriteria pencarian: '${search}'`
+//   );
+
+//   let query = "SELECT * FROM todos";
+//   const params = [];
+
+//   if (search) {
+//     query += " WHERE task LIKE ?";
+//     params.push(`%${search}%`);
+//   }
+
+//   db.query(query, params, (err, todos) => {
+//     if (err) {
+//       console.error("Database query error:", err);
+//       return res.status(500).json({ error: "Internal Server Error" });
+//     }
+//     console.log("Berhasil mengirim todos:", todos.length, "item.");
+//     res.json({ todos: todos });
+//   });
+// });
 
 app.use((req, res) => {
   res.status(404).send("404 - Page not found");

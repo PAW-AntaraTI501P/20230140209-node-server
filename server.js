@@ -2,9 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const db = require("./database/db.js");
-const {router: todoRoutes, todos} = require("./routes/todo.js");
+const { router: todoRoutes, todos } = require("./routes/todo.js");
+const todoDbRoutes = require("./routes/tododb.js");
 const cors = require("cors");
 const port = process.env.PORT;
+const authRoutes = require("./routes/auth.js")
+const authMiddleware = require("./middleware/auth.js")
 const methodOverride = require("method-override");
 const expressLayout = require("express-ejs-layouts");
 app.use(expressLayout);
@@ -13,6 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use("/todos", todoRoutes);
+app.use("/api/auth", authRoutes)
+app.use("/api/todos", authMiddleware, todoDbRoutes);
 app.use(express.static('public'));
 
 app.use(cors());

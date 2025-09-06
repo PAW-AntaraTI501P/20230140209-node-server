@@ -15,7 +15,7 @@ app.use(expressLayout);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use("/todos", todoRoutes);
+app.use("/todos", todoDbRoutes);
 app.use("/api/auth", authRoutes)
 app.use("/api/todos", authMiddleware, todoDbRoutes);
 app.use(express.static('public'));

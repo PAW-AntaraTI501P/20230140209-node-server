@@ -1,4 +1,4 @@
-<img width="1919" height="956" alt="image" src="https://github.com/user-attachments/assets/855c39e1-9367-4e42-b082-e14e98b25308" /># Membangun Fitur Otentikasi Pengguna
+# Membangun Fitur Otentikasi Pengguna
 > this project was created for Tugas 12 Praktikum Pengembangan Aplikasi Web <br>
 > author: Lu'lu' Luthfiah | 20230140209
 
@@ -13,3 +13,4 @@
 | **Login Page** |<img width="1919" height="954" alt="image" src="https://github.com/user-attachments/assets/0cd9be7b-8007-497a-8fdc-8e337afcae86" />|
 | **Home Page (After Login)** |<img width="1919" height="952" alt="image" src="https://github.com/user-attachments/assets/54ab53a0-37dc-4b10-a1d9-266a1c2d5094" />|
 | **Todo Page** |<img width="1919" height="956" alt="image" src="https://github.com/user-attachments/assets/11af28be-6193-4c5b-8f22-14c8bfe7e288" />|
+

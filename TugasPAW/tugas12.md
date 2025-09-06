@@ -7,5 +7,7 @@
 |---|---|
 | **Postman API Register** |<img width="1919" height="1007" alt="image" src="https://github.com/user-attachments/assets/244727c4-3226-41f9-aec9-5e19c6614c19" />|
 | **Postman API Login** |<img width="1919" height="1007" alt="image" src="https://github.com/user-attachments/assets/7096ab47-5c06-4f84-9667-d809b783d9ba" />|
+| **Landing Page** |<img width="1919" height="960" alt="image" src="https://github.com/user-attachments/assets/d81c7735-9ab6-4f11-a634-71847d73e502" />|
 | **Register Page** |<img width="1919" height="959" alt="image" src="https://github.com/user-attachments/assets/e2124a8c-29ac-4079-923c-78585c63aead" />|
-| **Login Page** |<img width="1919" height="957" alt="image" src="https://github.com/user-attachments/assets/32df8c9e-3f52-4414-88ff-b10c70f890b1" />|
+| **Login Page** |<img width="1919" height="954" alt="image" src="https://github.com/user-attachments/assets/0cd9be7b-8007-497a-8fdc-8e337afcae86" />|
+| **Home Page (After Login)** |<img width="1919" height="952" alt="image" src="https://github.com/user-attachments/assets/54ab53a0-37dc-4b10-a1d9-266a1c2d5094" />|

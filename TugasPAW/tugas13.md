@@ -1,5 +1,7 @@
 # Sistem Pendeteksi Suhu & Kelembapan Berbasis DHT22
-> this project was created for Tugas 13 Praktikum Pengembangan Aplikasi Web
+> this project was created for Tugas 13 Praktikum Pengembangan Aplikasi Web <br>
+> author: Lu'lu' Luthfiah - 20230140209
+
 [Wokwi-Project](https://wokwi.com/projects/441309834767784961)
 
 ## Screenshot
